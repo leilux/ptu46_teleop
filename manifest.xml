@@ -1,0 +1,19 @@
+<package>
+  <description brief="ptu46_teleop">
+
+     ptu46_teleop
+
+  </description>
+  <author>xpx</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ptu46_teleop</url>
+  <depend package="rospy"/>
+  <depend package="turtlesim"/>
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="ptu46"/>
+
+</package>
+
+

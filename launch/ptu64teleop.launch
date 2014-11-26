@@ -1,0 +1,7 @@
+<launch>
+    <!-- Tuttlesim Node -->
+    <node pkg="ptu46" type="ptu46" name="ptu"/>
+    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen"/>
+
+    <node pkg="ptu46_teleop" type="ptu46teleop.py" name="ptu46teleop" output="screen"/>
+</launch>
