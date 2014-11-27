@@ -48,7 +48,13 @@ qtcreator-*
 *.un~
 Session.vim
 .netrwhist
+*~# vim.gitignore
+*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
 *~
+
 
 # Catkin custom files
 CATKIN_IGNORE
