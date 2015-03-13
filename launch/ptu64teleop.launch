@@ -4,4 +4,5 @@
     <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen"/>
 
     <node pkg="ptu46_teleop" type="ptu46teleop.py" name="ptu46teleop" output="screen"/>
+    <node pkg="ptu46_teleop" type="android_proxy.py" name="android_proxy" output="screen"/>
 </launch>

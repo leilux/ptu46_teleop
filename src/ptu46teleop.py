@@ -5,6 +5,7 @@ import roslib; roslib.load_manifest("ptu46_teleop")
 import rospy
 from turtlesim.msg import Velocity
 from sensor_msgs.msg import JointState
+from ptu46_teleop.msg import AndroidControl
 
 
 class PTU46Teleop(object):
@@ -27,6 +28,11 @@ class PTU46Teleop(object):
             Velocity, 
             self.cb_teleop)
 
+        self.sub_android_teleop = rospy.Subscriber(
+            '/androidcontrol',
+            AndroidControl,
+            self.cb_android_teleop)
+
         self.sub_ptu_state = rospy.Subscriber(
             '/ptu/state',
             JointState,
@@ -39,8 +45,18 @@ class PTU46Teleop(object):
             (0,2): 'left',
             (0,-2): 'right',}
 
+    def cb_android_teleop(self, msg):
+        key = ({1:'left', 2: 'up', 3:'right', 4: 'down'})[msg.key]
+        self.cb_key(key)
+
 
     def cb_teleop(self, msg):
+        key = self.keymap[(msg.linear, msg.angular)]
+        self.cb_key(key)
+
+
+    def cb_key(self, key):
+
         '''linear, angular ↑(2,0) ↓(-2,0) ←(0,2) →(0,-2)'''
         currenttime = rospy.Time.now()
 
@@ -50,7 +66,6 @@ class PTU46Teleop(object):
         msg_out.velocity = [1.0, 0.8] # 1500 pos/s
         #msg_out.velocity = [1.347, 1.347] # 1500 pos/s
 
-        key = self.keymap[(msg.linear, msg.angular)]
         if (currenttime - self.lasttime > self.max_duration):
             print '---'
             if   key == 'up':
